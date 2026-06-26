@@ -1,0 +1,25 @@
+{
+  "cortex": {
+    "PreInvocation": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node dist/hooks/sessionStart.js"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "write_to_file|edit_file|Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node dist/hooks/logFileEdit.js"
+          }
+        ]
+      }
+    ]
+  }
+}

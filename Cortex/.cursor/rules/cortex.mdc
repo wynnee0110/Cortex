@@ -1,0 +1,31 @@
+---
+description: Cortex persistent memory — session logging and long-term context
+alwaysApply: true
+---
+
+# Cortex Memory
+
+This project uses **Cortex** for persistent code memory across sessions.
+
+## Automatic (hooks)
+
+- **Session start**: Cortex memory is injected; a session ID is created in `.cortex/session.json`.
+- **File edits**: Full file state is saved to `core/sessions/<id>.json` under `fileStates` (no diffs).
+
+## Agent responsibilities
+
+1. **Start of session** — Call `get_context` if Cortex memory is not already in context.
+2. **Decisions / mistakes** — Call `save_memory` for durable project knowledge (`decisions`, `mistakes`, `architecture`).
+3. **Session notes** — Call `log_event` with type `decision` or `mistake` for session-scoped notes.
+4. **Rejections** — Call `log_event` with type `reject_change` when the user rejects a change.
+
+## MCP tools
+
+| Tool | When |
+|------|------|
+| `get_context` | Session start |
+| `save_memory` | Durable decisions, mistakes, architecture |
+| `search_memory` | Look up past knowledge |
+| `log_event` | Decisions, mistakes, rejections (file edits are automatic via hooks) |
+
+Do not duplicate file-change logging — hooks handle `modify_file` / `create_file` with full file content.

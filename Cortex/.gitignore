@@ -1,0 +1,4 @@
+node_modules/
+dist/
+.cortex/
+core/sessions/*.json
