@@ -28,7 +28,7 @@ APIs, structure, and storage design may change frequently.
 
 ## ⚙️ Vision
 
-Cortex aims to become the missing “brain layer” for AI agents —  
+Cortex aims to become the missing “brain layer” for AI agents 
 a simple, open-source system that makes memory persistent, structured, and usable
 
 ---
